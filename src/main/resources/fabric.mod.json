@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "moltenmc",
+  "version": "${version}",
+
+  "name": "MoltenMC",
+  "description": "A new renderer for Minecraft powered by Vulkan.",
+  "authors": [],
+  "contact": {},
+
+  "license": "MIT",
+  "icon": "assets/moltenmc/icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": ["org.ahraman.moltenmc.client.MoltenMCClient"],
+    "main": ["org.ahraman.moltenmc.MoltenMC"]
+  },
+
+  "mixins": [
+    "moltenmc.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}"
+  }
+}
