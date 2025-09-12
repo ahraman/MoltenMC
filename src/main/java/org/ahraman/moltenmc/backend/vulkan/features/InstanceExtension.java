@@ -2,6 +2,8 @@ package org.ahraman.moltenmc.backend.vulkan.features;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.MessageFormat;
+
 public enum InstanceExtension implements Extension {
     VK_KHR_get_physical_device_properties2,
     VK_KHR_device_group_creation,
@@ -37,6 +39,11 @@ public enum InstanceExtension implements Extension {
         return ExtensionType.INSTANCE;
     }
 
+    @Override
+    public final @NotNull String toString() {
+        return MessageFormat.format("extension(type = {0}, name = {1})", this.type(), this.extensionName());
+    }
+
     public static final class Custom implements Extension {
         private final @NotNull String name;
 
@@ -52,6 +59,11 @@ public enum InstanceExtension implements Extension {
         @Override
         public @NotNull ExtensionType type() {
             return ExtensionType.INSTANCE;
+        }
+
+        @Override
+        public @NotNull String toString() {
+            return MessageFormat.format("extension(type = {0}, name = {1}, custom)", this.type(), this.extensionName());
         }
     }
 }
