@@ -3,8 +3,6 @@ package org.ahraman.moltenmc.backend.vulkan.instance;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.text.MessageFormat;
-
 public enum InstanceExtension {
     VK_KHR_get_physical_device_properties2,
     VK_KHR_device_group_creation,
@@ -40,6 +38,6 @@ public enum InstanceExtension {
 
     @Override
     public final @NotNull String toString() {
-        return MessageFormat.format("extension(type = instance, name = {0})", this.name());
+        return this.name();
     }
 }

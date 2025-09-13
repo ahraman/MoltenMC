@@ -69,4 +69,9 @@ public enum InstanceSetting {
     public @NotNull String id() {
         return id;
     }
+
+    @Override
+    public @NotNull String toString() {
+        return this.id();
+    }
 }

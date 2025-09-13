@@ -13,6 +13,8 @@ import java.util.LinkedHashSet;
 import java.util.SequencedSet;
 import java.util.Set;
 
+import static org.lwjgl.vulkan.KHRPortabilityEnumeration.*;
+
 public class InstanceDescriptor implements InstanceSettingAcceptor {
     private @NotNull ApiVersion version = ApiVersion.VULKAN_1_0;
     private final @NotNull SequencedSet<String> layers = new LinkedHashSet<>();
@@ -87,7 +89,10 @@ public class InstanceDescriptor implements InstanceSettingAcceptor {
 
     public @NotNull VkInstanceCreateInfo getCreateInfo(@NotNull MemoryStack stack) {
         var applicationInfo = this.getApplicationInfo(stack);
-        var createInfo = VkInstanceCreateInfo.calloc(stack).sType$Default().pApplicationInfo(applicationInfo);
+        var createInfo = VkInstanceCreateInfo.calloc(stack)
+                                             .sType$Default()
+                                             .pApplicationInfo(applicationInfo)
+                                             .flags(this.getCreateFlags());
 
         var layers = VulkanUtils.bufferOfASCIIs(stack, this.layers());
         if (layers != null) {
@@ -101,6 +106,18 @@ public class InstanceDescriptor implements InstanceSettingAcceptor {
         }
 
         return createInfo;
+    }
+
+    public int getCreateFlags() {
+        int flag = 0;
+        if (this.extensions().contains(InstanceExtension.VK_KHR_portability_enumeration)) {
+            // Maybe make this optional, rather than mandatory whenever the extension is enabled. But then again, who
+            // wants to enable `VK_KHR_portability_enumeration` if they DON'T want to additionally enumerate
+            // nonconforming implementations?
+            flag |= VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR;
+        }
+
+        return flag;
     }
 
     public @NotNull VkApplicationInfo getApplicationInfo(@NotNull MemoryStack stack) {

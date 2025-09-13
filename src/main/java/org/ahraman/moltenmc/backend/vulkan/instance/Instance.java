@@ -7,10 +7,14 @@ import org.lwjgl.vulkan.VkInstance;
 
 import static org.lwjgl.vulkan.VK10.*;
 
-public class Instance {
+public final class Instance {
     private final @NotNull VkInstance handle;
     private final @NotNull InstanceCapabilities capabilities;
     private final @NotNull InstanceInfo info;
+
+    public static @NotNull InstanceFactory factory() {
+        return new InstanceFactory();
+    }
 
     public Instance(
         @NotNull VkInstance handle,
@@ -21,10 +25,7 @@ public class Instance {
         this.info = info;
     }
 
-    Instance(@NotNull InstanceDescriptor descriptor) {
-        this.capabilities = descriptor.getCapabilities();
-        this.info = descriptor.getInfo();
-
+    static @NotNull Instance create(@NotNull InstanceDescriptor descriptor) {
         try (var stack = MemoryStack.stackPush()) {
             var createInfo = descriptor.getCreateInfo(stack);
 
@@ -32,7 +33,7 @@ public class Instance {
             Results.checked(vkCreateInstance(createInfo, null, buffer), "create instance");
 
             long handle = buffer.get(0);
-            this.handle = new VkInstance(handle, createInfo);
+            return new Instance(new VkInstance(handle, createInfo), descriptor.getCapabilities(), descriptor.getInfo());
         }
     }
 
