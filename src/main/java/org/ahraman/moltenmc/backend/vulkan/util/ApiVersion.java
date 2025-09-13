@@ -7,12 +7,13 @@ import java.text.MessageFormat;
 import static org.lwjgl.vulkan.VK10.*;
 import static org.lwjgl.vulkan.VK11.*;
 import static org.lwjgl.vulkan.VK12.*;
+import static org.lwjgl.vulkan.VK13.*;
 
 public record ApiVersion(int value) implements Comparable<ApiVersion> {
     public static final @NotNull ApiVersion VULKAN_1_0 = new ApiVersion(VK_API_VERSION_1_0);
     public static final @NotNull ApiVersion VULKAN_1_1 = new ApiVersion(VK_API_VERSION_1_1);
     public static final @NotNull ApiVersion VULKAN_1_2 = new ApiVersion(VK_API_VERSION_1_2);
-    public static final @NotNull ApiVersion VULKAN_1_3 = new ApiVersion(VK_API_VERSION_1_2);
+    public static final @NotNull ApiVersion VULKAN_1_3 = new ApiVersion(VK_API_VERSION_1_3);
 
     public static @NotNull ApiVersion of(int value) {
         return new ApiVersion(value);
