@@ -151,8 +151,8 @@ public abstract class InstanceCondition {
             if (provider.extensions().contains(this.extension)) {
                 acceptor.extensions().add(this.extension);
                 return true;
-            } else if ((this.layerDependent && acceptor.layers().stream().anyMatch(layer -> Objects.requireNonNull(
-                provider.extensions(layer)).contains(this.extension)))) {
+            } else if (this.layerDependent && acceptor.layers().stream().anyMatch(layer -> Objects.requireNonNull(
+                provider.extensions(layer)).contains(this.extension))) {
                 acceptor.extensions().add(this.extension);
                 return true;
             }

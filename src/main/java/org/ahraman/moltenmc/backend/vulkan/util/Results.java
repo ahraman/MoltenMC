@@ -24,6 +24,8 @@ public final class Results {
     private static final int VK_PIPELINE_BINARY_MISSING_KHR = 1000483000;
     private static final int VK_ERROR_NOT_ENOUGH_SPACE_KHR = -1000483000;
 
+    private Results() {}
+
     public static void checked(int result, @NotNull String message) {
         checked(result, message, IntSet.of(VK_SUCCESS));
     }

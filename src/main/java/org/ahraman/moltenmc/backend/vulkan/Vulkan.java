@@ -57,10 +57,10 @@ public final class Vulkan {
             var buffer = VkLayerProperties.malloc(count, stack);
             Results.checked(vkEnumerateInstanceLayerProperties(countBuffer, buffer), "enumerate instance layers");
 
-            return buffer.stream()
-                         .collect(ImmutableMap.toImmutableMap(l -> l != null ? l.layerNameString() : null,
-                                                              l -> l != null ? getSupportedExtensions(l.layerName())
-                                                                       : null));
+            return buffer.stream().collect(ImmutableMap.toImmutableMap(l -> l != null ? l.layerNameString() : null,
+                                                                       l -> l != null
+                                                                                ? getSupportedExtensions(l.layerName())
+                                                                                : null));
         }
     }
 
