@@ -23,8 +23,7 @@ import static org.lwjgl.vulkan.VK10.*;
 public final class Vulkan {
     private static @Nullable VulkanCapabilities capabilities;
 
-    private Vulkan() {
-    }
+    private Vulkan() {}
 
     public static @NotNull VulkanCapabilities getSupportedCapabilities() {
         return getSupportedCapabilities(false);
