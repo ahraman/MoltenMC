@@ -48,8 +48,8 @@ public enum InstanceSetting {
     DISPLAY_EXTENDED_QUERIES("display_extended_queries", extension(InstanceExtension.VK_KHR_get_display_properties2)),
 
     DEBUG_CALLBACKS("debug_callbacks",
-                    any(extension(InstanceExtension.VK_EXT_debug_utils),
-                        extension(InstanceExtension.VK_EXT_debug_report))),
+                    any(extension(InstanceExtension.VK_EXT_debug_utils, true),
+                        extension(InstanceExtension.VK_EXT_debug_report, true))),
     LAYER_SETTINGS("layer_settings", extension(InstanceExtension.VK_EXT_layer_settings, true)),
     LAYER_VALIDATION_SETTINGS("layer_validation_settings",
                               any(setting(LAYER_SETTINGS),
